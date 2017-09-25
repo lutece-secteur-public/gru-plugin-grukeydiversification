@@ -1,0 +1,44 @@
+<#include "manageencryptionkey_tabs.html" />
+<@tabs2 tab="encryptionkey" />
+
+<@box>
+	<@boxHeader title='#i18n{grukeydiversification.manage_encryptionkey.title}' boxTools=true>
+		<@tform class='form-inline pull-right' name='manage_encryptionkey' action='jsp/admin/plugins/grukeydiversification/ManageEncryptionKeys.jsp'>
+			<@button type='submit' name='view_createEncryptionKey' buttonIcon='plus' title='#i18n{grukeydiversification.manage_encryptionkeys.buttonAdd}' />
+		</@tform>
+	</@boxHeader>
+	<@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    <div class="clearfix"></div>
+    <@table>
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{grukeydiversification.manage_encryptionkeys.columnCode}</th>
+            <th>#i18n{grukeydiversification.manage_encryptionkeys.columnKey}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+            <#list encryptionkey_list as encryptionkey >
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <td>
+                ${encryptionkey.code}
+            </td>
+            <td>
+                ${encryptionkey.key}
+            </td>
+        <td>
+			<@aButton href='jsp/admin/plugins/grukeydiversification/ManageEncryptionKeys.jsp?view=modifyEncryptionKey&id=${encryptionkey.id}' title='#i18n{portal.util.labelModify}' buttonIcon='pencil' showTitle=false />
+						
+			<@aButton href='jsp/admin/plugins/grukeydiversification/ManageEncryptionKeys.jsp?action=confirmRemoveEncryptionKey&id=${encryptionkey.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' color='btn-danger' showTitle=false />
+
+        </td>
+        </tr>
+        </#list>
+    </@table>
+
+    <@paginationAdmin paginator=paginator />
+
+  </@boxBody>
+</@box>

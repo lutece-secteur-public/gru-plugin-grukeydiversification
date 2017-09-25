@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Plugin GRU key diversification</title>
+    </properties>
+    <body>
+        <section name="Plugin GRU key diversification">
+            <subsection name="Introduction">
+                <p>Ce plugin permet de crypter les identifiants de certains objets. Ces identifiants sont cryptés / décryptés à l'aide de clés de cryptage.
+                Par exemple, ils peuvent être cryptés selon le type de demande ou selon le fournisseur de services.</p>
+                <p>Les objets pris en charge sont les suivants :
+                    <ul>
+                        <li><code>fr.paris.lutece.plugins.grubusiness.business.customer.Customer</code> de la librairie <code>gru-library-grubusiness</code></li>
+                        <li><code>fr.paris.lutece.plugins.identitystore.web.rs.dto.IdentityDto</code> de la librairie <code>gru-library-identitystore</code></li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="Configuration">
+                <p>Le plugin met à disposition une <code>AdminFeature</code> permettant de configurer les clés de cryptage.</p>
+                <p>Une clé de cryptage est composée :
+                    <ul>
+                        <li>de l'identifiant de l'objet métier qui doit être unique parmi toutes les clés. Cet identifiant lie l'objet métier à la clé de cryptage.</li>
+                        <li>de la clé de cryptage elle-même. Une fois enregistrée, cette valeur ne peut pas être changée pour ne pas corrompre les données déjà cryptées.</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="Cryptage / décryptage">
+                <p>Le plugin contient 2 services :</p>
+                <p><strong>Service de cryptage de <code>Customer</code></strong></p>
+                <p>Le service <code>fr.paris.lutece.plugins.grukeydiversification.service.encryption.CustomerEncryptionService</code> implémente l'interface <code>fr.paris.lutece.plugins.grubusiness.service.encryption.ICustomerEncryptionService</code> de la librairie <code>gru-library-grubusiness</code>.
+                Il permet de crypter / décrypter un objet <code>Customer</code>. Il faut lui passer en paramètre :
+                <ul>
+                    <li>un objet <code>fr.paris.lutece.plugins.grubusiness.business.demand.Demand</code> de la librairie <code>gru-library-grubusiness</code>
+                car le type de demande est utilisé en tant qu'identifiant de l'objet métier.</li>
+                    <li>ou une <code>String</code> qui correspond directement à l'identifiant de l'objet métier.</li>
+                </ul>
+                </p>
+                <p>
+                Ce service est déclaré en tant que bean dans le fichier contexte Spring : <code>grukeydiversification.customerEncryption</code>.
+                </p>
+                <p><strong>Service de cryptage de <code>IdentityDto</code></strong></p>
+                <p>Le service <code>fr.paris.lutece.plugins.grukeydiversification.service.encryption.IdentityEncryptionService</code> implémente l'interface <code>fr.paris.lutece.plugins.identitystore.service.encryption.IIdentityEncryptionService</code> de la librairie <code>gru-library-identitystore</code>.
+                Il permet de crypter / décrypter un objet <code>IdentityDto</code>. Il faut lui passer en paramètre :
+                <ul>
+                    <li>un objet implémentant l'interface <code>fr.paris.lutece.plugins.identitystore.business.IClientApplication</code> de la librairie <code>gru-library-identitystore</code>
+                car le code du fournisseur de services est utilisé en tant qu'identifiant de l'objet métier.</li>
+                </ul>
+                </p>
+                <p>
+                Ce service est déclaré en tant que bean dans le fichier contexte Spring : <code>grukeydiversification.identityEncryption</code>.
+                </p>
+            </subsection>
+            <subsection name="Cache">
+                <p>Le plugin peut mettre les clés de cryptage en cache pour réduire le nombre de requêtes en base de données. Pour utiliser le cache, il suffit de l'activer dans le menu Lutece des caches.</p>
+            </subsection>
+            <subsection name="Utilisation">
+                <p>Les beans peuvent être référencés dans le fichier contexte Spring du plugin voulant utiliser les services.</p>
+            </subsection>
+        </section>
+    </body>
+</document>
+

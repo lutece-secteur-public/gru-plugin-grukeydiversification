@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Plugin GRU key diversification</title>
+    </properties>
+    <body>
+        <section name="Plugin GRU key diversification">
+            <subsection name="Introduction">
+                <p>This plugin enables to encryt identifiers of some objects. These identifiers are encrypted / decrypted with encryption keys.
+                For example, they can be encrypted depending on the demand type or the client application.</p>
+                <p>The objects the plugin takes charge of are the following:
+                    <ul>
+                        <li><code>fr.paris.lutece.plugins.grubusiness.business.customer.Customer</code> from the library <code>gru-library-grubusiness</code></li>
+                        <li><code>fr.paris.lutece.plugins.identitystore.web.rs.dto.IdentityDto</code> from the library <code>gru-library-identitystore</code></li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="Configuration">
+                <p>This plugin provides an <code>AdminFeature</code> which enables the configuration of the encryption keys.</p>
+                <p>An encryption key is composed of:
+                    <ul>
+                        <li>the id of the business object which must be unique among all the encryption keys. This id links the business object to the encryption key.</li>
+                        <li>the encryption key itself. Once saved, this value cannot be changed in order not to corrupt already encrypted data.</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="Encryption / decryption">
+                <p>The plugin contains 2 services:</p>
+                <p><strong>Customer encryption service</strong></p>
+                <p>The service <code>fr.paris.lutece.plugins.grukeydiversification.service.encryption.CustomerEncryptionService</code> implements the interface <code>fr.paris.lutece.plugins.grubusiness.service.encryption.ICustomerEncryptionService</code> from the library <code>gru-library-grubusiness</code>.
+                It enables the encryption / decryption of an object <code>Customer</code>. It takes as parameters:
+                <ul>
+                    <li>an object <code>fr.paris.lutece.plugins.grubusiness.business.demand.Demand</code> from the library <code>gru-library-grubusiness</code>
+                because the demand type is used as an id of the business object.</li>
+                    <li>or a <code>String</code> which directly corresponds to the id of the business object.</li>
+                </ul>
+                </p>
+                <p>
+                This service is declared as a bean in the Spring context file: <code>grukeydiversification.customerEncryption</code>.
+                </p>
+                <p><strong>Identity encryption service</strong></p>
+                <p>The service <code>fr.paris.lutece.plugins.grukeydiversification.service.encryption.IdentityEncryptionService</code> implements the interface <code>fr.paris.lutece.plugins.identitystore.service.encryption.IIdentityEncryptionService</code> from the library <code>gru-library-identitystore</code>.
+                It enables the encryption / decryption of an object <code>IdentityDto</code>. It takes as parameters:
+                <ul>
+                    <li>an object implementing the interface <code>fr.paris.lutece.plugins.identitystore.business.IClientApplication</code> from the library <code>gru-library-identitystore</code>
+                because the client application code is used as an id of the business object.</li>
+                </ul>
+                </p>
+                <p>
+                This service is declared as a bean in the Spring context file: <code>grukeydiversification.identityEncryption</code>.
+                </p>
+            </subsection>
+            <subsection name="Cache">
+                <p>The plugin can put the encryption keys in a cache in order to reduce the number of database requests. To use the cache, activate it in the Lutece cache menu.</p>
+            </subsection>
+            <subsection name="Usage">
+                <p>The beans can be referenced in the Spring context file of the plugin which wants to use these services.</p>
+            </subsection>
+        </section>
+    </body>
+</document>
+

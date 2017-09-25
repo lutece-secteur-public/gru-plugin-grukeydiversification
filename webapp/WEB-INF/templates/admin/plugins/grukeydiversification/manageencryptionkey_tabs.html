@@ -1,0 +1,10 @@
+<#macro tabs2 tab >
+<@tabs>
+	<@listTabs>
+			<li <#if tab="encryptionkey">class="active"</#if>>
+				<a href="jsp/admin/plugins/grukeydiversification/ManageEncryptionKeys.jsp">#i18n{grukeydiversification.manage_encryptionkeys.pageTitle}</a>
+			</li>
+	</@listTabs>
+</@tabs>
+
+</#macro>

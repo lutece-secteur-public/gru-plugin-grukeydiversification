@@ -1,0 +1,25 @@
+<#include "manageencryptionkey_tabs.html" />
+<@tabs2 tab="encryptionkey" />
+
+<@box>
+	<@boxHeader title='#i18n{grukeydiversification.modify_encryptionkey.title}' />
+	<@boxBody>
+    <@tform class="form-horizontal" method="post" name="modify_encryptionkey" action="jsp/admin/plugins/grukeydiversification/ManageEncryptionKeys.jsp">
+			<@messages errors=errors />
+			<input type="hidden" id="id" name="id" value="${encryptionkey.id}"/>
+			
+				<@formGroup labelKey='#i18n{grukeydiversification.modify_encryptionkey.labelCode}' helpKey='#i18n{grukeydiversification.modify_encryptionkey.labelCode.help}' mandatory=true>
+					<@input type='text' name='code' value='${encryptionkey.code}' />
+				</@formGroup>
+				
+                <@formGroup labelKey='#i18n{grukeydiversification.modify_encryptionkey.labelKey}' helpKey='#i18n{grukeydiversification.modify_encryptionkey.labelKey.help}' >
+                  <#if encryptionkey.key?has_content>
+                    <@input type='text' name='key' value='${encryptionkey.key}' disabled=true readonly=true />
+                  <#else>
+                    <@input type='text' name='key' value='${encryptionkey.key}' />
+                  </#if>
+				</@formGroup>
+        <@actionButtons button1Name="action_modifyEncryptionKey" button2Name="view_manageEncryptionKey"/>
+    </@tform>
+	</@boxBody>
+</@box>
