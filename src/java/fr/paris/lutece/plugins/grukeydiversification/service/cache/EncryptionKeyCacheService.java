@@ -39,8 +39,12 @@ import fr.paris.lutece.plugins.grukeydiversification.business.EncryptionKey;
 import fr.paris.lutece.portal.service.cache.AbstractCacheableService;
 
 /**
- * <p>This class represents a cache service for encryption keys.</p>
- * <p>Designed as a singleton</p>
+ * <p>
+ * This class represents a cache service for encryption keys.
+ * </p>
+ * <p>
+ * Designed as a singleton
+ * </p>
  *
  */
 public final class EncryptionKeyCacheService extends AbstractCacheableService

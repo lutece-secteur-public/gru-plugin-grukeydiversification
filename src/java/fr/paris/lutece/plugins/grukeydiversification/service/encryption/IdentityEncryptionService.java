@@ -70,7 +70,7 @@ public class IdentityEncryptionService implements IIdentityEncryptionService
 
         return identityEncrypted;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -106,14 +106,14 @@ public class IdentityEncryptionService implements IIdentityEncryptionService
         {
             throw new AppException( "The client application must not be null!" );
         }
-        
+
         String strEncryptionKeyCode = clientApplication.getCode( );
-        
+
         if ( strEncryptionKeyCode == null )
         {
             throw new AppException( "The client application code must not be null!" );
         }
-        
+
         EncryptionKey encryptionKey = EncryptionKeyHome.findByCode( strEncryptionKeyCode );
 
         if ( encryptionKey == null )

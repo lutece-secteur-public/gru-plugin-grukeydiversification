@@ -62,7 +62,7 @@ public class CustomerEncryptionService implements ICustomerEncryptionService
 
         return encrypt( customer, demand.getTypeId( ) );
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -84,7 +84,7 @@ public class CustomerEncryptionService implements ICustomerEncryptionService
 
         return customerEncrypted;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -98,7 +98,7 @@ public class CustomerEncryptionService implements ICustomerEncryptionService
 
         return decrypt( customer, demand.getTypeId( ) );
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -120,7 +120,7 @@ public class CustomerEncryptionService implements ICustomerEncryptionService
 
         return customerDecrypted;
     }
-    
+
     /**
      * Fetches the encryption key from the specified code
      * 
@@ -134,7 +134,7 @@ public class CustomerEncryptionService implements ICustomerEncryptionService
         {
             throw new AppException( "The code must not be null!" );
         }
-        
+
         EncryptionKey encryptionKey = EncryptionKeyHome.findByCode( strEncryptionKeyCode );
 
         if ( encryptionKey == null )
