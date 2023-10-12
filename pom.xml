@@ -71,4 +71,11 @@
         <jiraProjectName>GRUKEYDIVE</jiraProjectName>
         <jiraComponentId>13773</jiraComponentId>
     </properties>
+
+    <scm>
+        <connection>scm:git:https://github.com/lutece-secteur-public/gru-plugin-grukeydiversification.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-secteur-public/gru-plugin-grukeydiversification.git</developerConnection>
+        <url>https://github.com/lutece-secteur-public/gru-plugin-grukeydiversification.git</url>
+    </scm>
+
 </project>
